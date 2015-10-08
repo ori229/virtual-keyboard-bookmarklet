@@ -57,6 +57,7 @@ setInterval(function(){
 <button type=button onClick=doinsert('b');>b</button>\
 <button type=button onClick=doinsert('א');>א</button>\
 <button type=button onClick=doinsert('&#x263A;');>&#x263A;</button>\
+<button type=button onClick=wrap('{','}');>{_}</button>\
 <br/>\
 <button type=button onClick=doinsert('&#x202C;');>&#x25BC; PDF</button>\
 <button type=button onClick=doinsert('&#x200E;');>&#x2192; LRM</button>\
@@ -75,15 +76,21 @@ setInterval(function(){
 var lasttext;
 // http://stackoverflow.com/questions/54147/how-do-i-insert-a-character-at-the-caret-with-javascript
 function doinsert(charToAdd) {
-        if (! lasttext) { alert ("Before using the virtual keyboard select one of the input boxes."); return;}
-
+    if (! lasttext) { alert ("Before using the virtual keyboard select one of the input boxes."); return;}
     var oldtext = lasttext.value;
     var curpos = lasttext.selectionStart;
     pretext = oldtext.substring(0,curpos);
     posttest = oldtext.substring(curpos,oldtext.length);
     lasttext.value = pretext + charToAdd + posttest;
+    setCaretToPos(lasttext, curpos + 1);
+}
 
-        setCaretToPos(lasttext, curpos + 1);
+function wrap(pre,post) {
+    if (! lasttext) { alert ("Before using the virtual keyboard select one of the input boxes."); return;}
+    var oldtext = lasttext.value;
+    var curpos = lasttext.selectionStart;
+    lasttext.value = pre+oldtext+post;
+    setCaretToPos(lasttext, curpos + 1);
 }
 
 // http://stackoverflow.com/questions/499126/jquery-set-cursor-position-in-text-area
