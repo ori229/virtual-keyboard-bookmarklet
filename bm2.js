@@ -65,7 +65,7 @@ setInterval(function(){
 <button type=button onClick=doinsert('&#x202A;');>&#x250C; LRE</button>\
 <button type=button onClick=doinsert('&#x202B;');>&#x2510; RLE</button>\
             <style type='text/css'>\
-              #vkframe { position: absolute; width: auto; top: 10; left: 20;\
+              #vkframe { position: absolute; width: auto; top: 0; left: 20;\
               border:thin solid gold; cursor: pointer; z-index: 900; }\
             </style>\
           </div>");
