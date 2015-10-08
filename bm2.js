@@ -15,7 +15,7 @@
   } else {
     initMyBookmarklet();
   }
-  
+
   function initMyBookmarklet() {
     (window.myBookmarklet = function() {
       function getSelText() {
@@ -30,34 +30,48 @@
         return s;
       }
 
-$( "textarea,input" ).each(function( index ) {
-  $(this).css("background-color", "red");
-  console.log( index + ": " + $( this ).attr("value") );
+// checking a few times each second if new input fields added dinamically
+setInterval(function(){
+ $("iframe").contents().find("textarea,input").each(function( index ) {
+  //$(this).css("background-color", "red");
+  //console.log( index + ": " + $( this ).attr("value") );
   $(this).blur(function(){
     console.log( "blur a textarea with text:" + $(this).text() );
     lasttext = this;
   });
-});
+ });
 
-      if ($("#wikiframe").length == 0) {
+ $( "textarea,input" ).each(function( index ) {
+  //$(this).css("background-color", "red");
+  //console.log( index + ": " + $( this ).attr("value") );
+  $(this).blur(function(){
+    console.log( "blur a textarea with text:" + $(this).text() );
+    lasttext = this;
+  });
+ });
+}, 500 );
+
           $("body").append("\
-          <div id='wikiframe'>\
+          <div id='vkframe'>\
 <button type=button onClick=doinsert('A');>A</button>\
-<button type=button onClick=doinsert('B');>B</button>\
+<button type=button onClick=doinsert('b');>b</button>\
+<button type=button onClick=doinsert('א');>א</button>\
+<button type=button onClick=doinsert('&#x263A;');>&#x263A;</button>\
+<br/>\
+<button type=button onClick=doinsert('&#x202C;');>&#x25BC; PDF</button>\
+<button type=button onClick=doinsert('&#x200E;');>&#x2192; LRM</button>\
+<button type=button onClick=doinsert('&#x200F;');>&#x2190; RLM</button>\
+<button type=button onClick=doinsert('&#x202A;');>&#x250C; LRE</button>\
+<button type=button onClick=doinsert('&#x202B;');>&#x2510; RLE</button>\
             <style type='text/css'>\
-              #wikiframe { position: absolute; width: 100px; height: 50px; top: 0; left: 0; background-color: rgba(255,255,255,.25); cursor: pointer; z-index: 900; }\
+              #vkframe { position: absolute; width: auto; top: 10; left: 20;\
+              border:thin solid gold; cursor: pointer; z-index: 900; }\
             </style>\
           </div>");
-      } else {
-        $("#wikiframe_veil").fadeOut(750);
-        $("#wikiframe iframe").slideUp(500);
-        setTimeout("$('#wikiframe').remove()", 750);
-      }
     })();
   }
 
 })();
-
 var lasttext;
 // http://stackoverflow.com/questions/54147/how-do-i-insert-a-character-at-the-caret-with-javascript
 function doinsert(charToAdd) {
