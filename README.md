@@ -1,7 +1,7 @@
 # virtual-keyboard-bookmarklet
+
 bookmarklet which loads a virtual keyboard - draft
 
-TODO: Add letters...
 TODO: http://jqueryui.com/draggable/
 
 Demo: http://icc-aleph22.hosted.exlibrisgroup.com/bm_menu.htm
